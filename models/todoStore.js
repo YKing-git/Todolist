@@ -1,6 +1,111 @@
 // models/todoStore.js　データ保存担当
 
-// models/todoStore.js
+// models/todoStore.js  (Postgres版)
+
+const { Pool } = require("pg");
+const bcrypt = require("bcrypt");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
+
+// =======================
+// ToDo取得（ユーザー別）
+// =======================
+async function getTodos(userId) {
+  const result = await pool.query(
+    "SELECT * FROM todos WHERE user_id = $1 ORDER BY id DESC",
+    [userId]
+  );
+
+  return result.rows.map(row => ({
+    ...row,
+    done: !!row.done
+  }));
+}
+
+
+// =======================
+// ToDo追加
+// =======================
+async function addTodo(userId, text) {
+  const result = await pool.query(
+    "INSERT INTO todos (user_id, text, done) VALUES ($1, $2, 0) RETURNING id",
+    [userId, text]
+  );
+
+  return result.rows[0].id;
+}
+
+
+// =======================
+// 削除
+// =======================
+async function deleteTodoById(userId, id) {
+  const result = await pool.query(
+    "DELETE FROM todos WHERE id = $1 AND user_id = $2",
+    [id, userId]
+  );
+
+  return result.rowCount > 0;
+}
+
+
+// =======================
+// トグル
+// =======================
+async function toggleTodoById(userId, id) {
+  const result = await pool.query(
+    `UPDATE todos
+     SET done = CASE WHEN done = 1 THEN 0 ELSE 1 END
+     WHERE id = $1 AND user_id = $2`,
+    [id, userId]
+  );
+
+  return result.rowCount > 0;
+}
+
+
+// =======================
+// ユーザー作成（暗号化）
+// =======================
+async function createUser(username, password) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const result = await pool.query(
+    "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id",
+    [username, hashedPassword]
+  );
+
+  return result.rows[0].id;
+}
+
+
+// =======================
+// ユーザー検索
+// =======================
+async function findUserByName(username) {
+  const result = await pool.query(
+    "SELECT * FROM users WHERE username = $1",
+    [username]
+  );
+
+  return result.rows[0];
+}
+
+
+module.exports = {
+  getTodos,
+  addTodo,
+  deleteTodoById,
+  toggleTodoById,
+  createUser,
+  findUserByName
+};
+
+/*sqlite3用
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 const dbPath = path.join(__dirname, "../todo.db");
@@ -136,3 +241,4 @@ module.exports = {
   createUser,
   findUserByName
 };
+*/
