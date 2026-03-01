@@ -9,6 +9,15 @@ const bcrypt = require("bcrypt");
 // ログイン画面
 router.get("/login", (req, res) => {
   res.send(`
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ログイン - ToDoアプリ</title>
+  <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
     <div class="login-register">
     <h1>ログイン</h1>
     <form method="POST" action="/login">
@@ -27,6 +36,15 @@ router.get("/register", (req, res) => {
   const error = req.query.error || "";
 
   res.send(`
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>新規登録 - ToDoアプリ</title>
+  <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
     <div class="login-register"> 
     <h1>新規登録</h1>
 
