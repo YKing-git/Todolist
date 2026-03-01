@@ -155,7 +155,7 @@ router.get("/", async (req, res) => {
   <script>
     // Service Worker登録
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/service-worker.js")
+      navigator.serviceWorker.register("/service-workers.js")
         .then(() => console.log("Service Worker登録成功"))
         .catch((err) => console.log("Service Worker登録失敗:", err));
     }

@@ -55,8 +55,8 @@ self.addEventListener("fetch", event => {
 */
 
 //開発用
-// service-worker.js
-const CACHE_NAME = "todo-cache-dev-v1";
+// service-workers.js
+const CACHE_NAME = "todo-cache-dev-v2";
 const urlsToCache = [
  // "/",             // ホームページ
   "/style.css",    // CSS

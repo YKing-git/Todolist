@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //PWA用
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
+  navigator.serviceWorker.register("/service-workers.js");
 }
 
 // 初期表示
