@@ -24,7 +24,8 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+  font-size: 28px;
 }
 
 #remainingCount {
@@ -42,10 +43,12 @@ form {
 
 form input {
   flex: 1;
-  padding: 12px;
+  padding: 14px;
+  font-size: 18px;
   border-radius: 8px;
   border: 1px solid #ddd;
-  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 form button {
@@ -53,8 +56,8 @@ form button {
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 16px;
+  padding: 14px 16px;
+  font-size: 18px;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -135,9 +138,10 @@ form button:hover {
   }
 
   form input, form button {
-    font-size: 18px;
-    padding: 14px;
+    font-size: 16px;
+    padding: 12px;
     width: 100%;
+    box-sizing: border-box;
   }
 
   #filters {
@@ -161,45 +165,48 @@ form button:hover {
   background: white;
   max-width: 400px;
   width: 100%;
-  margin: 80px auto;  /* 上下余白大きめ */
-  padding: 32px;
+  margin: 50px auto;
+  padding: 24px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 18px; /* 全体文字サイズ */
+  box-sizing: border-box;
 }
 
 .login-register h1 {
   text-align: center;
-  font-size: 28px; /* タイトル大きく */
   margin-bottom: 10px;
+  font-size: 28px;
 }
 
 .login-register form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .login-register input {
-  padding: 16px;
+  padding: 14px;
   font-size: 18px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-register button {
-  padding: 16px;
+  padding: 14px;
   font-size: 18px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: none;
   background: #667eea;
   color: white;
   cursor: pointer;
   transition: 0.2s;
+  width: 100%;
 }
 
 .login-register button:hover {
@@ -217,23 +224,21 @@ form button:hover {
   text-decoration: underline;
 }
 
-/* ========================================= */
-/* レスポンシブ（スマホ） */
-/* ========================================= */
-@media (max-width: 600px) {
+/* スマホ対応 */
+@media (max-width: 480px) {
   .login-register {
-    margin: 40px 16px;
-    padding: 24px;
-  }
-
-  .login-register h1 {
-    font-size: 24px;
+    margin: 30px 10px;
+    padding: 16px;
   }
 
   .login-register input,
   .login-register button {
     font-size: 16px;
-    padding: 14px;
+    padding: 12px;
+  }
+
+  .login-register a {
+    font-size: 14px;
   }
 }
 
