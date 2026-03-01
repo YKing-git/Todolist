@@ -25,6 +25,7 @@ router.get("/register", (req, res) => {
   const error = req.query.error || "";
 
   res.send(`
+    <div class="login-register"> 
     <h1>新規登録</h1>
 
     ${error ? `<p style="color:red;">${error}</p>` : ""}
@@ -35,6 +36,7 @@ router.get("/register", (req, res) => {
       <button>登録</button>
     </form>
     <a href="/login">ログインへ戻る</a>
+    </div>
   `);
 });
 
