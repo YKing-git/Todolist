@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 // ログイン画面
 router.get("/login", (req, res) => {
   res.send(`
-    div class="login-register">
+    <div class="login-register">
     <h1>ログイン</h1>
     <form method="POST" action="/login">
       <input name="username" placeholder="ユーザー名" required>
