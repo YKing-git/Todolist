@@ -115,22 +115,21 @@ router.get("/", async (req, res) => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ToDoアプリ</title>
 
   <link rel="stylesheet" href="/style.css">
+
+  <!-- PWA -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#4CAF50">
 
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#4CAF50">
-
-  <link rel="apple-touch-icon" href="/icon-192.png">
+  <!-- iOS PWA 対応 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180.png">
+</head>
 
-  </head>
 <body>
 <div class="app">
   <h1>ToDoアプリ</h1>
