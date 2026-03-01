@@ -157,29 +157,75 @@ form button:hover {
 /* ========================================= */
 /* ログイン・登録画面専用スタイル */
 /* ========================================= */
+/* ログイン・登録画面共通 */
 .login-register {
+  background: white;
+  max-width: 400px;
+  width: 100%;
+  margin: 50px auto;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 400px;
-  margin: 40px auto;
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .login-register h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.login-register form input,
-.login-register form button {
-  width: 100%;
-  font-size: 16px;
+.login-register form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-register input {
   padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
+.login-register button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
+.login-register button:hover {
+  opacity: 0.85;
+}
+
+.login-register a {
+  text-align: center;
+  color: #667eea;
+  text-decoration: none;
+}
+
+.login-register a:hover {
+  text-decoration: underline;
+}
+
+/* スマホ対応 */
+@media (max-width: 480px) {
+  .login-register {
+    margin: 30px 10px;
+    padding: 16px;
+  }
+
+  .login-register input,
+  .login-register button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
 
