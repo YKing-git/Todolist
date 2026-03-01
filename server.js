@@ -9,6 +9,16 @@ const path = require("path");
 
 app.use(express.static("public"));
 
+const path = require("path");
+
+// 静的ファイル
+app.use(express.static("public"));
+
+// ルートで index.html を返す
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 //外部公開版
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
