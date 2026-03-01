@@ -118,6 +118,8 @@ router.get("/", async (req, res) => {
   <title>ToDoアプリ</title>
 
   <link rel="stylesheet" href="/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4CAF50">
 </head>
 <body>
 <div class="app">
