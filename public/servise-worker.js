@@ -19,3 +19,6 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
+//更新履歴　（何か変更するたびにつける）
+//  update 2026-03-01
