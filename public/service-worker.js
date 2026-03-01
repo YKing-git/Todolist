@@ -58,12 +58,13 @@ self.addEventListener("fetch", event => {
 // service-worker.js
 const CACHE_NAME = "todo-cache-dev-v1";
 const urlsToCache = [
-  "/",             // ホームページ
+ // "/",             // ホームページ
   "/style.css",    // CSS
   "/script.js",    // JS
   "/manifest.json",// PWA マニフェスト
   "/icon-192.png", // アイコン
-  "/icon-512.png"
+  "/icon-512.png",
+  "/apple-icon-180.png" // iOS 用アイコン
 ];
 
 // インストール時に静的ファイルをキャッシュ
