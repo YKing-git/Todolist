@@ -56,42 +56,49 @@ self.addEventListener("fetch", event => {
 
 //開発用
 // service-worker.js
-const CACHE_NAME = "todo-cache-dev-v1"; // 開発中はバージョン番号を変えやすくして常に更新
+const CACHE_NAME = "todo-cache-dev-v1";
 const urlsToCache = [
-  "/",
-  "/manifest.json",
-  "/style.css",
-  "/script.js",
+  "/",             // ホームページ
+  "/style.css",    // CSS
+  "/script.js",    // JS
+  "/manifest.json",// PWA マニフェスト
+  "/icon-192.png", // アイコン
+  "/icon-512.png"
 ];
 
-// インストール時にキャッシュ
+// インストール時に静的ファイルをキャッシュ
 self.addEventListener("install", event => {
   self.skipWaiting(); // 新しい SW を即アクティブ化
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
 });
 
 // アクティベート時に古いキャッシュを削除
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(
+    caches.keys().then(keys =>
+      Promise.all(
         keys
           .filter(key => key !== CACHE_NAME)
           .map(key => caches.delete(key))
-      );
-    }).then(() => self.clients.claim()) // 新しい SW ですぐにコントロール
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
-// フェッチ時はキャッシュ優先 + ネットワーク fallback
+// フェッチ時の挙動
 self.addEventListener("fetch", event => {
+  const requestUrl = new URL(event.request.url);
+
+  // API やログインページはキャッシュを使わず、ネットワーク優先
+  if (requestUrl.pathname.startsWith("/todos") || requestUrl.pathname.startsWith("/login")) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // それ以外はキャッシュ優先
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      return cached || fetch(event.request);
-    })
+    caches.match(event.request).then(cached => cached || fetch(event.request))
   );
 });
