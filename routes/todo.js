@@ -114,49 +114,51 @@ router.get("/", async (req, res) => {
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>ToDoアプリ</title>
 
   <link rel="stylesheet" href="/style.css">
 
-  <!-- PWA -->
+  <!-- PWA manifest -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#4CAF50">
 
-  <!-- iOS PWA 対応 -->
+  <!-- iOS PWA対応 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- iOSアイコン（複数サイズ推奨） -->
+  
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180.png">
 </head>
-
 <body>
-<div class="app">
-  <h1>ToDoアプリ</h1>
-  <a href="/logout">ログアウト</a>
-  <p id="remainingCount"></p>
+  <div class="app">
+    <h1>ToDoアプリ</h1>
+    <a href="/logout">ログアウト</a>
+    <p id="remainingCount"></p>
 
-  <form id="addForm">
-    <input name="todo" placeholder="やること">
-    <button>追加</button>
-  </form>
+    <form id="addForm">
+      <input name="todo" placeholder="やること">
+      <button>追加</button>
+    </form>
 
-  <div id="filters">
-    <button data-filter="all">すべて</button>
-    <button data-filter="active">未完了</button>
-    <button data-filter="done">完了</button>
+    <div id="filters">
+      <button data-filter="all">すべて</button>
+      <button data-filter="active">未完了</button>
+      <button data-filter="done">完了</button>
+    </div>
+
+    <ul id="todoList"></ul>
   </div>
-
-<ul id="todoList"></ul>
-</div>
-
 
   <script src="/script.js"></script>
   <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/service-worker.js");
-  }
+    // Service Worker登録
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .then(() => console.log("Service Worker登録成功"))
+        .catch((err) => console.log("Service Worker登録失敗:", err));
+    }
   </script>
 </body>
 </html>
