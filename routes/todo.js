@@ -120,6 +120,9 @@ router.get("/", async (req, res) => {
   <link rel="stylesheet" href="/style.css">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#4CAF50">
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4CAF50">
 </head>
 <body>
 <div class="app">
@@ -143,6 +146,11 @@ router.get("/", async (req, res) => {
 
 
   <script src="/script.js"></script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js");
+  }
+  </script>
 </body>
 </html>
   `);
