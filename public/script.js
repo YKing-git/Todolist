@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const todoList = document.getElementById("todoList");
   const addForm = document.getElementById("addForm");
 
+//PWA用
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js");
+}
+
 // 初期表示
 (async () => {
   const response = await fetch("/todos");
