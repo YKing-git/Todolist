@@ -1,3 +1,4 @@
+/*
 const CACHE_NAME = "todo-cache-v1";
 const urlsToCache = [
   "/",
@@ -48,6 +49,49 @@ self.addEventListener("fetch", event => {
           return caches.match("/");
         }
       });
+    })
+  );
+});
+*/
+
+//開発用
+// service-worker.js
+const CACHE_NAME = "todo-cache-dev-v1"; // 開発中はバージョン番号を変えやすくして常に更新
+const urlsToCache = [
+  "/",
+  "/manifest.json",
+  "/style.css",
+  "/script.js",
+];
+
+// インストール時にキャッシュ
+self.addEventListener("install", event => {
+  self.skipWaiting(); // 新しい SW を即アクティブ化
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+
+// アクティベート時に古いキャッシュを削除
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      );
+    }).then(() => self.clients.claim()) // 新しい SW ですぐにコントロール
+  );
+});
+
+// フェッチ時はキャッシュ優先 + ネットワーク fallback
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      return cached || fetch(event.request);
     })
   );
 });
