@@ -128,8 +128,8 @@ router.get("/", async (req, res) => {
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
   <!-- iOSアイコン（複数サイズ推奨） -->
-  
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://todolist-j8f3.onrender.com/apple-icon-180.png">
+  <!-- 旧コード <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180.png"> -->
 </head>
 <body>
   <div class="app">
