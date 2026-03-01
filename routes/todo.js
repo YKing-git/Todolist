@@ -164,7 +164,7 @@ router.get("/", async (req, res) => {
 </body>
 </html>
   `);
-});S
+});
 
 // ログアウト
 router.get("/logout", (req, res) => {
