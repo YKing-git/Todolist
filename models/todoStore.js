@@ -54,6 +54,8 @@ async function getTodos(userId) {
 // =======================
 // ToDo追加
 // =======================
+//SQLite用
+/*
 async function addTodo(userId, text) {
   const result = await pool.query(
     "INSERT INTO todos (user_id, text, done) VALUES ($1, $2, 0) RETURNING id",
@@ -62,7 +64,15 @@ async function addTodo(userId, text) {
 
   return result.rows[0].id;
 }
-
+*/
+//PostgreSQL 対応
+async function addTodo(userId, text) {
+  const result = await pool.query(
+    "INSERT INTO todos (user_id, text, done) VALUES ($1, $2, $3) RETURNING id",
+    [userId, text, false]
+  );
+  return result.rows[0].id;
+}
 
 // =======================
 // 削除
@@ -80,6 +90,8 @@ async function deleteTodoById(userId, id) {
 // =======================
 // トグル
 // =======================
+//SQLite用
+/*
 async function toggleTodoById(userId, id) {
   const result = await pool.query(
     `UPDATE todos
@@ -90,7 +102,17 @@ async function toggleTodoById(userId, id) {
 
   return result.rowCount > 0;
 }
-
+*/
+//PostgreSQL 対応
+async function toggleTodoById(userId, id) {
+  const result = await pool.query(
+    `UPDATE todos
+     SET done = NOT done
+     WHERE id = $1 AND user_id = $2`,
+    [id, userId]
+  );
+  return result.rowCount > 0;
+}
 
 // =======================
 // ユーザー作成（暗号化）
